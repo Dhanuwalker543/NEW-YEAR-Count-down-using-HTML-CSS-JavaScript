@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Year Countdown</title>
+    <style>
+        body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #e4e4e4;
+    font-family: 'Arial', sans-serif;
+    color: rgb(4, 4, 10);
+    border: 0.5rem black solid;
+}
+
+.countdown-container {
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 3rem;
+}
+
+#countdown {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.time-section {
+    text-align: center;
+}
+
+.time {
+    font-size: 48px;
+    display: block;
+}
+
+.label {
+    font-size: 16px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <h1>Can't Wait?</h1>
+        <div id="countdown">
+            <div class="time-section">
+                <span id="days" class="time"></span>
+                <span class="label">Days</span>
+            </div>
+            <div class="time-section">
+                <span id="hours" class="time"></span>
+                <span class="label">Hours</span>
+            </div>
+            <div class="time-section">
+                <span id="minutes" class="time"></span>
+                <span class="label">Minutes</span>
+            </div>
+            <div class="time-section">
+                <span id="seconds" class="time"></span>
+                <span class="label">Seconds</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const countdown = () => {
+        const now = new Date();
+        const nextYear = now.getFullYear() + 1;
+        const newYearTime = new Date(`January 1, ${nextYear} 00:00:00`);
+        const currentTime = now.getTime();
+        const timeLeft = newYearTime - currentTime;
+
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        document.getElementById("days").textContent = days;
+        document.getElementById("hours").textContent = hours < 10 ? "0" + hours : hours;
+        document.getElementById("minutes").textContent = minutes < 10 ? "0" + minutes : minutes;
+        document.getElementById("seconds").textContent = seconds < 10 ? "0" + seconds : seconds;
+    };
+
+    setInterval(countdown, 1000);
+    countdown();
+});
+
+    </script>
+</body>
+</html>
